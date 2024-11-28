@@ -27,13 +27,6 @@ public class DatosUsuario extends javax.swing.JFrame {
     }
     
     private void createComboBox() {
-        final String[] niveles={"Seleccionar","Primaria","Secundaria","Preparatoria"};
-        final JComboBox box = new JComboBox<>(niveles);
-        
-        //estas son las opciones simples, si las usas no necesitas el renderizador o editor
-        //box.setForeground(new Color(0, 255, 0));
-        //box.setBackground(new Color(255, 153, 51));
-
         //aquí está el código para un editor y un renderizador simples
         jComboBox1.setRenderer(new MiBoxRenderer());
         jComboBox1.setEditor(new BoxEditor());
