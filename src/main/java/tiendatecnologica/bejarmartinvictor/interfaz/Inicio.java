@@ -145,21 +145,27 @@ public class Inicio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void comprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comprarActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        Comprar ventana = new Comprar(this);
+        ventana.setVisible(true);
     }//GEN-LAST:event_comprarActionPerformed
 
     private void datoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_datoUsuarioActionPerformed
         this.dispose();
-        DatosUsuario ventana = new DatosUsuario();
+        DatosUsuario ventana = new DatosUsuario(this);
         ventana.setVisible(true);
     }//GEN-LAST:event_datoUsuarioActionPerformed
 
     private void productosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productosActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        ProductosDatos ventana = new ProductosDatos(this);
+        ventana.setVisible(true);
     }//GEN-LAST:event_productosActionPerformed
 
     private void historicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_historicoActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        HistorialCompras ventana = new HistorialCompras(this);
+        ventana.setVisible(true);
     }//GEN-LAST:event_historicoActionPerformed
 
     /**

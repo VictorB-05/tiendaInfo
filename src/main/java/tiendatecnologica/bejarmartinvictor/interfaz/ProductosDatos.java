@@ -16,10 +16,10 @@ import javax.swing.*;
  *
  * @author alumno
  */
-public class DatosUsuario extends javax.swing.JFrame {
+public class ProductosDatos extends javax.swing.JFrame {
 
     private JFrame inicio;
-    public DatosUsuario(JFrame inicio) {
+    public ProductosDatos(JFrame inicio) {
         this.inicio = inicio;
         initComponents();
         createComboBox();
@@ -72,10 +72,11 @@ public class DatosUsuario extends javax.swing.JFrame {
     
     private DefaultComboBoxModel databaseUsuario(){
         DefaultComboBoxModel<String> aux = new DefaultComboBoxModel<>();
-        aux.addElement("Paco");
-        aux.addElement("Chill de cojones");
-        aux.addElement("Ismael");
-        
+        aux.addElement("Moviles");
+        aux.addElement("Torres");
+        aux.addElement("Consolas");
+        aux.addElement("Monitores");
+        aux.addElement("Teclados");
         return aux;
     }
 
@@ -90,14 +91,13 @@ public class DatosUsuario extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         botonUsuario = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1500, 800));
 
         jPanel1.setBackground(new java.awt.Color(209, 182, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(1500, 232));
@@ -106,16 +106,16 @@ public class DatosUsuario extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(242, 242, 242));
         jLabel1.setText("VICTOR’S INFORMATIC’S");
 
-        jButton3.setBackground(new java.awt.Color(209, 182, 255));
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/atras.png"))); // NOI18N
-        jButton3.setBorderPainted(false);
-        jButton3.setContentAreaFilled(false);
-        jButton3.setFocusPainted(false);
-        jButton3.setFocusable(false);
-        jButton3.setPreferredSize(new java.awt.Dimension(50, 50));
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jButton2.setBackground(new java.awt.Color(209, 182, 255));
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/atras.png"))); // NOI18N
+        jButton2.setBorderPainted(false);
+        jButton2.setContentAreaFilled(false);
+        jButton2.setFocusPainted(false);
+        jButton2.setFocusable(false);
+        jButton2.setPreferredSize(new java.awt.Dimension(50, 50));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jButton2ActionPerformed(evt);
             }
         });
 
@@ -125,27 +125,27 @@ public class DatosUsuario extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(65, 65, 65)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 176, Short.MAX_VALUE)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(165, 165, 165)
                 .addComponent(jLabel1)
                 .addGap(282, 282, 282))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(39, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(87, 87, 87)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         botonUsuario.setBackground(new java.awt.Color(125, 109, 153));
         botonUsuario.setFont(new java.awt.Font("Lucida Sans", 0, 24)); // NOI18N
         botonUsuario.setForeground(new java.awt.Color(232, 219, 255));
-        botonUsuario.setText("BUSCAR USUARIO");
+        botonUsuario.setText("BUSCAR PRODUCTOS");
         botonUsuario.setToolTipText("");
         botonUsuario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         botonUsuario.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -178,7 +178,7 @@ public class DatosUsuario extends javax.swing.JFrame {
         jTextArea1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTextArea1.setForeground(new java.awt.Color(146, 127, 179));
         jTextArea1.setRows(5);
-        jTextArea1.setText("NOMBRE:\n\nEMAIL:\n\nDIRECCION:");
+        jTextArea1.setText("PRODUCTO1:");
         jTextArea1.setFocusable(false);
         jScrollPane1.setViewportView(jTextArea1);
 
@@ -186,6 +186,7 @@ public class DatosUsuario extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1486, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(227, 227, 227)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -194,7 +195,6 @@ public class DatosUsuario extends javax.swing.JFrame {
                 .addGap(232, 232, 232)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 497, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1491, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -230,19 +230,18 @@ public class DatosUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_botonUsuarioMouseExited
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-
+        // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         inicio.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jButton2ActionPerformed
 
-  
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel botonUsuario;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
