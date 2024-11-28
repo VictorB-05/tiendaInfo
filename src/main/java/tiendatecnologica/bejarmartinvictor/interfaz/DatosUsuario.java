@@ -21,10 +21,27 @@ public class DatosUsuario extends javax.swing.JFrame {
      * Creates new form DatosUsuario
      */
     public DatosUsuario() {
-        createComboBox();
         initComponents();
+        createComboBox();
         botonUsuario.setHorizontalAlignment(SwingConstants.CENTER);
-        /*// Personalizar el renderer
+    }
+    
+    private void createComboBox() {
+        final String[] niveles={"Seleccionar","Primaria","Secundaria","Preparatoria"};
+        final JComboBox box = new JComboBox<>(niveles);
+        
+        //estas son las opciones simples, si las usas no necesitas el renderizador o editor
+        //box.setForeground(new Color(0, 255, 0));
+        //box.setBackground(new Color(255, 153, 51));
+
+        //aquí está el código para un editor y un renderizador simples
+        jComboBox1.setRenderer(new MiBoxRenderer());
+        jComboBox1.setEditor(new BoxEditor());
+        jComboBox1.setEditable(true);        
+
+        //las modificaciones del renderizador y del editor no funcionarán.
+        jComboBox1.setEditable(true);
+        // Personalizar el renderer
             jComboBox1.setRenderer(new DefaultListCellRenderer() {
                 @Override
                 public Component getListCellRendererComponent(JList<?> list, Object value, int index,
@@ -57,29 +74,7 @@ public class DatosUsuario extends javax.swing.JFrame {
                 label.setOpaque(true);
                 return label;
             }
-        });*/
-    }
-    
-    private void createComboBox() {
-        final String[] niveles={"Seleccionar","Primaria","Secundaria","Preparatoria"};
-        final JComboBox box = new JComboBox<>(niveles);
-        
-        //estas son las opciones simples, si las usas no necesitas el renderizador o editor
-        //box.setForeground(new Color(0, 255, 0));
-        //box.setBackground(new Color(255, 153, 51));
-        
-        //si las dos opciones anteriores no son suficientes para usted, 
-        //aquí está el código para un editor y un renderizador simples
-        box.setRenderer(new MiBoxRenderer());
-        box.setEditor(new BoxEditor());
-        //Es obligatorio que el Editable sea verdadero, de lo contrario, 
-        //las modificaciones del renderizador y del editor no funcionarán.
-        box.setEditable(true);        
-        
-        box.setBounds(227, 377, 300, 30);
-        box.setVisible(true);
-        add(box);
-        
+        });
     }
 
     /**
