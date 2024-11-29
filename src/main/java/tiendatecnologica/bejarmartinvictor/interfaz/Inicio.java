@@ -5,8 +5,13 @@
 package tiendatecnologica.bejarmartinvictor.interfaz;
 
 import java.awt.Color;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+import tiendatecnologica.bejarmartinvictor.baseDatos.SQLite;
 
 /**
  *
@@ -18,6 +23,15 @@ public class Inicio extends javax.swing.JFrame {
      * Creates new form Inicio
      */
     public Inicio() {
+        try(SQLite conn = new SQLite()){
+            conn.inicio();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+            ex.printStackTrace();
+        }
         initComponents();
     }
 
