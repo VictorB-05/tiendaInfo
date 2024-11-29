@@ -14,7 +14,7 @@ public class SQLite implements AutoCloseable{
         
     private Connection connection;
     private final String bd ="tienda.db";
-
+//USAR SELECT DISTINC PARA COJER LAS CATEGORIAS
     
 /**
      * Crea la conexión a la base de datos
@@ -28,6 +28,7 @@ public class SQLite implements AutoCloseable{
     }
     
     public void inicio() throws SQLException{
+        LectorJson.leer();
         Statement statement = connection.createStatement();
 
         statement.executeUpdate("CREATE TABLE IF NOT EXISTS usuarios ("
@@ -46,9 +47,7 @@ public class SQLite implements AutoCloseable{
                 + "precio REAL,"
                 + "descripcion TEXT,"
                 + "pantalla TEXT,"
-                + "camara TEXT,"
-                + "bateria TEXT,"
-                + "ineventario INTEGER"
+                + "caracteristicas TEXT"
                 + ")");
 
         statement.executeUpdate("CREATE TABLE IF NOT EXISTS ventas ("
@@ -83,5 +82,8 @@ public class SQLite implements AutoCloseable{
             connection.close();
             System.out.println("Conexion cerrada...");
 	}
-    
+        
+    public void datosJson(){
+        
+    }
 }
