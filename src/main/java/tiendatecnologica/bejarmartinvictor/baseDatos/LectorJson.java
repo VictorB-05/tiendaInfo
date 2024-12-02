@@ -31,6 +31,10 @@ public class LectorJson {
     public static ArrayList<Producto> getProductos() {
         return productos;
     }
+
+    public static ArrayList<Usuario> getUsuarios() {
+        return usuarios;
+    }
     
     public static void leer(){
         JSONParser jsonParser = new JSONParser();

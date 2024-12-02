@@ -21,6 +21,7 @@ public class Producto {
     private int inventario;
 
     public Producto(String categoria, int id, String nombre, float precio, String descripcion, String caracteristicas, ArrayList<String> imagenes, int inventario) {
+        this.categoria = categoria;
         this.id = id;
         this.nombre = nombre;
         this.precio = precio;
@@ -28,6 +29,14 @@ public class Producto {
         this.caracteristicas = caracteristicas;
         this.imagenes = imagenes;
         this.inventario = inventario;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 
     public int getId() {
