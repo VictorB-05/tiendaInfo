@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
+import tiendatecnologica.bejarmartinvictor.baseDatos.UsarBBDD;
+import tiendatecnologica.bejarmartinvictor.objetos.Usuario;
 
 
 /**
@@ -71,11 +73,12 @@ public class DatosUsuario extends javax.swing.JFrame {
     }
     
     private DefaultComboBoxModel databaseUsuario(){
-        DefaultComboBoxModel<String> aux = new DefaultComboBoxModel<>();
-        aux.addElement("Paco");
-        aux.addElement("Chill de cojones");
-        aux.addElement("Ismael");
-        
+        DefaultComboBoxModel<Usuario> aux = new DefaultComboBoxModel();
+        Usuario seleciona = new Usuario(0, "SELECIONA UNO", "", "", 0, "", "");
+        aux.addElement(seleciona);
+        for(Usuario usuario :  UsarBBDD.usuarioBBDDSacar()){
+            aux.addElement(usuario);
+        }
         return aux;
     }
 
@@ -204,8 +207,8 @@ public class DatosUsuario extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(100, 100, 100)
-                        .addComponent(botonUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(133, 133, 133)
+                        .addComponent(botonUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(138, 138, 138))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(101, 101, 101)
@@ -217,7 +220,18 @@ public class DatosUsuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonUsuarioMouseClicked
-        
+        Usuario usuario = (Usuario) jComboBox1.getSelectedItem();
+        if(usuario.getId() != 0){
+            jTextArea1.setText( usuario.infoUsuario());
+        }else{
+            jTextArea1.setText("""
+                               NOMBRE:
+                               
+                               EMAIL:
+                               
+                               DIRECCION:
+                               """);
+        }
         
     }//GEN-LAST:event_botonUsuarioMouseClicked
 

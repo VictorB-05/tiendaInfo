@@ -93,5 +93,15 @@ public class Usuario {
     public void addCompra(Compra compra) {
         historialCompras.add(compra);
     }
+
+    @Override
+    public String toString() {
+        return id+" "+getNombre();
+    }
     
+    public String infoUsuario(){
+        return "NOMBRE: "+nombre+"ID: "+id+
+                "\n\nEMAIL: "+email+
+                "\n\nDIRECCION: nº: "+numero+" calle: "+calle+" ciudad: "+ciudad+" pais: "+pais;
+    }
 }

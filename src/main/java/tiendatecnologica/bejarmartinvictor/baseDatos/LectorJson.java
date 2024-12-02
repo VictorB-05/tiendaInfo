@@ -46,14 +46,12 @@ public class LectorJson {
             for (Object aux : arrayCategoria){
                 JSONObject categoria = (JSONObject) aux;
                 String cate = (String) categoria.get("nombre");
-                System.out.println(cate);
                 JSONArray arrayProductos = (JSONArray) categoria.get("productos");
                 addProductos(arrayProductos,cate);
             }
             JSONArray arrayUsuario = (JSONArray) tienda.get("usuarios");
             for (Object aux : arrayUsuario){
                 JSONObject usuario = (JSONObject) aux;
-                System.out.println(usuario);
                 addUsuario(usuario);
             }
         } catch (FileNotFoundException ex) {
@@ -68,12 +66,13 @@ public class LectorJson {
      private static void addProductos(JSONArray arrayProductos, String categoria) {
        for(Object aux : arrayProductos){
            JSONObject producto = (JSONObject) aux;
-           System.out.println(producto);
            String descrip = (String) producto.get("descripcion");
            int id = (int) (long) producto.get("id");
            String nombre = (String) producto.get("nombre");
            double precio = (double) producto.get("precio");
-           String caracteristicas = producto.get("caracteristicas").toString();
+           String caracteristicas = producto.get("caracteristicas").toString().replaceAll("[{}\"]", "");
+           caracteristicas = caracteristicas.replace(":", ": ");
+           caracteristicas = caracteristicas.replace(",", ", ");
            System.out.println(caracteristicas);
            ArrayList<String> imagenes = new ArrayList();
            JSONArray imagenesJ = (JSONArray) producto.get("imagenes");
@@ -82,7 +81,7 @@ public class LectorJson {
                String imagen = (String) img;
                imagenes.add(imagen);
            }
-           Producto productObj = new Producto(categoria,id, nombre, id, descrip, caracteristicas, imagenes, inventario);
+           Producto productObj = new Producto(categoria,id, nombre, precio, descrip, caracteristicas, imagenes, inventario);
            productos.add(productObj);
        }
     }

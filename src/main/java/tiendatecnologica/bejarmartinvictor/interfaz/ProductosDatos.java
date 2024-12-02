@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
+import tiendatecnologica.bejarmartinvictor.baseDatos.UsarBBDD;
+import tiendatecnologica.bejarmartinvictor.objetos.Producto;
 
 
 /**
@@ -19,6 +21,7 @@ import javax.swing.*;
 public class ProductosDatos extends javax.swing.JFrame {
 
     private JFrame inicio;
+    private DefaultComboBoxModel<String> aux;
     public ProductosDatos(JFrame inicio) {
         this.inicio = inicio;
         initComponents();
@@ -27,14 +30,11 @@ public class ProductosDatos extends javax.swing.JFrame {
     }
     
     private void createComboBox() {
-        //aquí está el código para un editor y un renderizador simples
         jComboBox1.setRenderer(new MiBoxRenderer());
         jComboBox1.setEditor(new BoxEditor());
         jComboBox1.setEditable(true);        
 
-        //las modificaciones del renderizador y del editor no funcionarán.
         jComboBox1.setEditable(true);
-        // Personalizar el renderer
             jComboBox1.setRenderer(new DefaultListCellRenderer() {
                 @Override
                 public Component getListCellRendererComponent(JList<?> list, Object value, int index,
@@ -70,13 +70,12 @@ public class ProductosDatos extends javax.swing.JFrame {
         });
     }
     
-    private DefaultComboBoxModel databaseUsuario(){
-        DefaultComboBoxModel<String> aux = new DefaultComboBoxModel<>();
-        aux.addElement("Moviles");
-        aux.addElement("Torres");
-        aux.addElement("Consolas");
-        aux.addElement("Monitores");
-        aux.addElement("Teclados");
+    private DefaultComboBoxModel databaseCategorias(){
+        aux = new DefaultComboBoxModel<>();
+        aux.addElement("Default");
+        for(String categorias : UsarBBDD.categoriasBBDDSacar()){
+            aux.addElement(categorias);
+        }
         return aux;
     }
 
@@ -163,7 +162,7 @@ public class ProductosDatos extends javax.swing.JFrame {
         });
 
         jComboBox1.setBackground(new java.awt.Color(237, 226, 255));
-        jComboBox1.setModel(databaseUsuario());
+        jComboBox1.setModel(databaseCategorias());
         jComboBox1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jComboBox1.setDebugGraphicsOptions(javax.swing.DebugGraphics.LOG_OPTION);
         jComboBox1.setFocusable(false);
@@ -178,7 +177,7 @@ public class ProductosDatos extends javax.swing.JFrame {
         jTextArea1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTextArea1.setForeground(new java.awt.Color(146, 127, 179));
         jTextArea1.setRows(5);
-        jTextArea1.setText("PRODUCTO1:");
+        jTextArea1.setText("PRODUCTO 000:\n");
         jTextArea1.setFocusable(false);
         jScrollPane1.setViewportView(jTextArea1);
 
@@ -192,8 +191,8 @@ public class ProductosDatos extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(botonUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
                     .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(232, 232, 232)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 497, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(180, 180, 180)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -205,8 +204,8 @@ public class ProductosDatos extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(100, 100, 100)
-                        .addComponent(botonUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(138, 138, 138))
+                        .addComponent(botonUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(171, 171, 171))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(101, 101, 101)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -217,7 +216,19 @@ public class ProductosDatos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonUsuarioMouseClicked
-        
+        int numero = jComboBox1.getSelectedIndex();
+        if(numero!=0){
+            String categoria = aux.getElementAt(numero);
+            System.out.println(categoria);
+            ArrayList<Producto> productos = UsarBBDD.prodcutoBBDDSacar(categoria);
+            String lable = "";
+            for(Producto producto :productos){
+                lable += producto.toString()+"\n";
+            }
+            jTextArea1.setText(lable);
+        }else{
+            jTextArea1.setText("PRODUCTO 000:");
+        }
         
     }//GEN-LAST:event_botonUsuarioMouseClicked
 

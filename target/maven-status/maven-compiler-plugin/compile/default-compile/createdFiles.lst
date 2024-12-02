@@ -6,6 +6,7 @@ tiendatecnologica\bejarmartinvictor\interfaz\HistorialCompras$3.class
 tiendatecnologica\bejarmartinvictor\interfaz\Comprar$4.class
 tiendatecnologica\bejarmartinvictor\interfaz\Inicio$2.class
 tiendatecnologica\bejarmartinvictor\baseDatos\SQLite.class
+tiendatecnologica\bejarmartinvictor\baseDatos\UsarBBDD.class
 tiendatecnologica\bejarmartinvictor\interfaz\ProductosDatos$2.class
 tiendatecnologica\bejarmartinvictor\interfaz\DatosUsuario$4.class
 tiendatecnologica\bejarmartinvictor\interfaz\DatosUsuario.class
@@ -17,6 +18,7 @@ tiendatecnologica\bejarmartinvictor\baseDatos\LectorJson.class
 tiendatecnologica\bejarmartinvictor\interfaz\Comprar$2.class
 tiendatecnologica\bejarmartinvictor\BejarMartinVictor.class
 tiendatecnologica\bejarmartinvictor\interfaz\ProductosDatos$5.class
+tiendatecnologica\bejarmartinvictor\objetos\Producto.class
 tiendatecnologica\bejarmartinvictor\interfaz\Inicio.class
 tiendatecnologica\bejarmartinvictor\interfaz\DatosUsuario$1.class
 tiendatecnologica\bejarmartinvictor\objetos\Usuario.class

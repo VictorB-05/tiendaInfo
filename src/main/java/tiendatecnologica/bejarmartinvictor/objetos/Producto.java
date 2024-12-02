@@ -14,13 +14,13 @@ public class Producto {
     private String categoria;
     private int id;
     private String nombre;
-    private float precio;
+    private double precio;
     private String descripcion;
     private String caracteristicas;
     private ArrayList<String> imagenes;
     private int inventario;
 
-    public Producto(String categoria, int id, String nombre, float precio, String descripcion, String caracteristicas, ArrayList<String> imagenes, int inventario) {
+    public Producto(String categoria, int id, String nombre, double precio, String descripcion, String caracteristicas, ArrayList<String> imagenes, int inventario) {
         this.categoria = categoria;
         this.id = id;
         this.nombre = nombre;
@@ -55,11 +55,11 @@ public class Producto {
         this.nombre = nombre;
     }
 
-    public float getPrecio() {
+    public double getPrecio() {
         return precio;
     }
 
-    public void setPrecio(float precio) {
+    public void setPrecio(double precio) {
         this.precio = precio;
     }
 
@@ -93,6 +93,11 @@ public class Producto {
 
     public void setInventario(int inventario) {
         this.inventario = inventario;
+    }
+
+    @Override
+    public String toString() {
+        return "PRODUCTO "+id +": "+ nombre + " " +  (Math.round(precio * 100) / 100d) + "€ categoria=" + categoria +  "\nDescripcion:" + descripcion + "\nCaracteristicas: " + caracteristicas + "\nCantidad: " + inventario;
     }
     
     

@@ -12,6 +12,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import tiendatecnologica.bejarmartinvictor.baseDatos.SQLite;
+import tiendatecnologica.bejarmartinvictor.baseDatos.UsarBBDD;
 
 /**
  *
@@ -32,7 +33,7 @@ public class Inicio extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, ex.getMessage());
             ex.printStackTrace();
         }
-        SQLite.datosJson();
+        UsarBBDD.datosJson();
         initComponents();
     }
 

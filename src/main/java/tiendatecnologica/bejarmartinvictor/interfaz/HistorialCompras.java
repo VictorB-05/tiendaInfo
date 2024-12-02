@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
+import tiendatecnologica.bejarmartinvictor.baseDatos.UsarBBDD;
+import tiendatecnologica.bejarmartinvictor.objetos.Usuario;
 
 
 /**
@@ -19,6 +21,7 @@ import javax.swing.*;
 public class HistorialCompras extends javax.swing.JFrame {
 
     private JFrame inicio;
+    private DefaultComboBoxModel<Usuario> comboList;
 
     public HistorialCompras(JFrame inicio) {
         this.inicio = inicio;
@@ -72,11 +75,13 @@ public class HistorialCompras extends javax.swing.JFrame {
     }
     
     private DefaultComboBoxModel databaseUsuario(){
-        DefaultComboBoxModel<String> aux = new DefaultComboBoxModel<>();
-        aux.addElement("Paco");
-        aux.addElement("Chill de cojones");
-        aux.addElement("Ismael");
-        return aux;
+        comboList = new DefaultComboBoxModel();
+        Usuario seleciona = new Usuario(0, "SELECIONA UNO", "", "", 0, "", "");
+        comboList.addElement(seleciona);
+        for(Usuario usuario :  UsarBBDD.usuarioBBDDSacar()){
+            comboList.addElement(usuario);
+        }
+        return comboList;
     }
 
     /**
@@ -205,8 +210,8 @@ public class HistorialCompras extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(100, 100, 100)
-                        .addComponent(botonUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(138, 138, 138))
+                        .addComponent(botonUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(171, 171, 171))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(101, 101, 101)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -217,7 +222,16 @@ public class HistorialCompras extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonUsuarioMouseClicked
-        
+        int numero = jComboBox1.getSelectedIndex();
+        if(numero!=0){
+            Usuario categoria = comboList.getElementAt(numero);
+            System.out.println(categoria);
+            Usuario usuarios = UsarBBDD.prodcutoBBDDSacar(categoria);
+            String lable = "";
+            jTextArea1.setText(lable);
+        }else{
+            jTextArea1.setText("COMPRA 0:");
+        }
         
     }//GEN-LAST:event_botonUsuarioMouseClicked
 
