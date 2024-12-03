@@ -104,4 +104,8 @@ public class Usuario {
                 "\n\nEMAIL: "+email+
                 "\n\nDIRECCION: nº: "+numero+" calle: "+calle+" ciudad: "+ciudad+" pais: "+pais;
     }
+
+    public void limpiarCompras() {
+        historialCompras = new ArrayList();
+    }
 }

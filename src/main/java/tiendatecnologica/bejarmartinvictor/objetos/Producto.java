@@ -31,6 +31,12 @@ public class Producto {
         this.inventario = inventario;
     }
 
+    public Producto(int id, String nombre, double precio) {
+        this.id = id;
+        this.nombre = nombre;
+        this.precio = precio;
+    }
+
     public String getCategoria() {
         return categoria;
     }

@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
 import tiendatecnologica.bejarmartinvictor.baseDatos.UsarBBDD;
+import tiendatecnologica.bejarmartinvictor.objetos.Compra;
 import tiendatecnologica.bejarmartinvictor.objetos.Usuario;
 
 
@@ -183,7 +184,7 @@ public class HistorialCompras extends javax.swing.JFrame {
         jTextArea1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTextArea1.setForeground(new java.awt.Color(146, 127, 179));
         jTextArea1.setRows(5);
-        jTextArea1.setText("PRODUCTO1:");
+        jTextArea1.setText("COMPRA :");
         jTextArea1.setFocusable(false);
         jScrollPane1.setViewportView(jTextArea1);
 
@@ -224,13 +225,15 @@ public class HistorialCompras extends javax.swing.JFrame {
     private void botonUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonUsuarioMouseClicked
         int numero = jComboBox1.getSelectedIndex();
         if(numero!=0){
-            Usuario categoria = comboList.getElementAt(numero);
-            System.out.println(categoria);
-            Usuario usuarios = UsarBBDD.prodcutoBBDDSacar(categoria);
+            Usuario usuario = comboList.getElementAt(numero);
+            usuario = UsarBBDD.prodcutoBBDDSacar(usuario);
             String lable = "";
+            for(Compra compra : usuario.getHistorialCompras()){
+                lable+="COMPRA :"+compra+"\n";
+            }
             jTextArea1.setText(lable);
         }else{
-            jTextArea1.setText("COMPRA 0:");
+            jTextArea1.setText("COMPRA :");
         }
         
     }//GEN-LAST:event_botonUsuarioMouseClicked

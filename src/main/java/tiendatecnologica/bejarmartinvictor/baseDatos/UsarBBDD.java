@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -216,24 +217,31 @@ public class UsarBBDD {
         return productos;
     }
     
-        public static Usuario prodcutoBBDDSacar(Usuario usuario){
+    public static Usuario prodcutoBBDDSacar(Usuario usuario){
         try (SQLite base = new SQLite()) {    
             Connection conn = base.getConnection();
-            PreparedStatement pstm = conn.prepareStatement("SELECT * FROM producto WHERE idUsuario = ?");
+            PreparedStatement pstm = conn.prepareStatement("SELECT * FROM ventas WHERE idUsuario = ?");
             pstm.setInt(1, usuario.getId());
             ResultSet rs = pstm.executeQuery();
+            usuario.limpiarCompras();
             while(rs.next()){                        
                 int id = rs.getInt("id");
-                String nombre = rs.getString("nombre");
-                float precio = rs.getFloat("precio");
-                String descripcion = rs.getString("descripcion");
-                String imagen = rs.getString("imagenes");
-                ArrayList<String> imagenes = new ArrayList();
-                for(String imgURL : imagen.split(",")){
-                    imagenes.add(imgURL);
+                int idProducto = rs.getInt("idProducto");
+                int cantidad = rs.getInt("cantidad");
+                Date fechaSql = rs.getDate("fecha");
+                LocalDate fecha = fechaSql.toLocalDate();
+                try (PreparedStatement pstmProducto = conn.prepareStatement("SELECT nombre, precio FROM producto WHERE id = ?")) {
+                    pstmProducto.setInt(1, idProducto); 
+                    try (ResultSet rsP = pstmProducto.executeQuery()) {
+                        if (rsP.next()) {
+                            String nombre = rsP.getString("nombre");
+                            double precio = rsP.getDouble("precio");
+                            Producto producto = new Producto(idProducto, nombre, precio);
+                            Compra compra = new Compra(producto, cantidad, fecha);
+                            usuario.addCompra(compra);
+                        }
+                    }
                 }
-                int inventario = rs.getInt("inventario");
-                String caracteristicas = rs.getString("caracteristicas");
             }
         }catch (SQLException ex) {
             Logger.getLogger(SQLite.class.getName()).log(Level.SEVERE, null, ex);
