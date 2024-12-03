@@ -103,9 +103,11 @@ public class Producto {
 
     @Override
     public String toString() {
-        return "PRODUCTO "+id +": "+ nombre + " " +  (Math.round(precio * 100) / 100d) + "€ categoria=" + categoria +  "\nDescripcion:" + descripcion + "\nCaracteristicas: " + caracteristicas + "\nCantidad: " + inventario;
+        return id +" "+ nombre;
     }
     
-    
+    public String datos() {
+        return "PRODUCTO "+id +": "+ nombre + " " +  (Math.round(precio * 100) / 100d) + "€ categoria:" + categoria +  "\nDescripcion:" + descripcion + "\nCaracteristicas: " + caracteristicas + "\nCantidad: " + inventario;
+    }
     
 }

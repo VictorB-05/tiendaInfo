@@ -68,13 +68,13 @@ public class Compra {
     }
 
     public double precioTotal(){
-        Double precioT = producto.getPrecio()*cantidad;
+        Double precioT = (Math.round(producto.getPrecio() * 100) / 100d) * cantidad;
         return precioT;
     }
     
     @Override
     public String toString() {
-        return  producto.getNombre() +" ID: "+getProductoId()+ " cantidad: " + cantidad + " fecha: " + fecha+"precio total: "+(Math.round(precioTotal() * 100) / 100d);
+        return  producto.getNombre() +" ID: "+getProductoId()+ " cantidad: " + cantidad + " fecha: " + fecha+"precio total: "+(Math.round(precioTotal() * 100) / 100d)+"€";
     }
    
 }
