@@ -42,6 +42,9 @@ public class Comprar extends javax.swing.JFrame {
     }
     
     private void modificarComponentes() {
+        ImageIcon icono = new ImageIcon(getClass().getResource("/sinCargar.jpg"));
+        imagen.setIcon(icono);
+        imagen.setHorizontalAlignment(JLabel.CENTER);
         createComboBox(usuarios);
         createComboBox(categoria);
         createComboBox(producto);
@@ -103,9 +106,7 @@ public class Comprar extends javax.swing.JFrame {
             String url = producto.getImagenes().get(numImg);
             ImageIcon img = new ImageIcon(getClass().getResource("/"+url));
             ImageIcon icono = redimensionarImagen(img, altoMaximo, anchoMaximo);
-
             imagen.setIcon(icono);
-            imagen.setHorizontalAlignment(JLabel.CENTER);
         }else{
             ImageIcon icono = new ImageIcon(getClass().getResource("/sinCargar.jpg"));
             imagen.setIcon(icono);
@@ -429,6 +430,7 @@ public class Comprar extends javax.swing.JFrame {
 
     private void categoriaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_categoriaItemStateChanged
         producto.setModel(databaseProducto());
+         caragarImg();
     }//GEN-LAST:event_categoriaItemStateChanged
 
     private void productoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_productoItemStateChanged

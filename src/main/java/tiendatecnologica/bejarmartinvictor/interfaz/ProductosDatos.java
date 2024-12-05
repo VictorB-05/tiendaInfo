@@ -189,7 +189,7 @@ public class ProductosDatos extends javax.swing.JFrame {
             ArrayList<Producto> productos = UsarBBDD.prodcutoBBDDSacar(categoria);
             String lable = "";
             for(Producto producto :productos){
-                lable += producto.toString()+"\n";
+                lable += producto.datos()+"\n";
             }
             jTextArea1.setText(lable);
         }else{
