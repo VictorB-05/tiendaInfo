@@ -27,52 +27,14 @@ public class HistorialCompras extends javax.swing.JFrame {
     public HistorialCompras(JFrame inicio) {
         this.inicio = inicio;
         initComponents();
-        createComboBox();
-        botonUsuario.setHorizontalAlignment(SwingConstants.CENTER);
+        modificarComponentes();
     }
     
-    private void createComboBox() {
-        //aquí está el código para un editor y un renderizador simples
+    private void modificarComponentes() {
         jComboBox1.setRenderer(new MiBoxRenderer());
         jComboBox1.setEditor(new BoxEditor());
-        jComboBox1.setEditable(true);        
-
-        //las modificaciones del renderizador y del editor no funcionarán.
-        jComboBox1.setEditable(true);
-        // Personalizar el renderer
-            jComboBox1.setRenderer(new DefaultListCellRenderer() {
-                @Override
-                public Component getListCellRendererComponent(JList<?> list, Object value, int index,
-                                                              boolean isSelected, boolean cellHasFocus) {
-                    JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-                    if (isSelected) {
-                        label.setBackground(Color.YELLOW); // Fondo al seleccionar
-                        label.setForeground(Color.RED);     // Texto al seleccionar
-                    } else {
-                        label.setBackground(Color.CYAN);   // Fondo normal
-                        label.setForeground(Color.BLACK);  // Texto normal
-                    }
-                    label.setOpaque(true); // Hacer visible el fondo
-                    return label;
-                }
-            });
-        // Configurar un renderer personalizado
-        jComboBox1.setRenderer(new DefaultListCellRenderer() {
-            @Override
-            public Component getListCellRendererComponent(JList<?> list, Object value, int index,
-                                                          boolean isSelected, boolean cellHasFocus) {
-                JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-                if (isSelected) {
-                    label.setBackground(new Color(84, 73, 102)); 
-                    label.setForeground(new Color(232,219,255));
-                } else {
-                    label.setBackground(new Color(125, 109, 153));
-                    label.setForeground(new Color(232,219,255));
-                }
-                label.setOpaque(true);
-                return label;
-            }
-        });
+        jComboBox1.setEditable(true);       
+        botonUsuario.setHorizontalAlignment(SwingConstants.CENTER);
     }
     
     private DefaultComboBoxModel databaseUsuario(){
@@ -199,7 +161,7 @@ public class HistorialCompras extends javax.swing.JFrame {
                     .addComponent(botonUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
                     .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(232, 232, 232)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 497, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 542, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(

@@ -25,49 +25,14 @@ public class ProductosDatos extends javax.swing.JFrame {
     public ProductosDatos(JFrame inicio) {
         this.inicio = inicio;
         initComponents();
-        createComboBox();
-        botonUsuario.setHorizontalAlignment(SwingConstants.CENTER);
+        modificarComponentes();
     }
     
-    private void createComboBox() {
+    private void modificarComponentes() {
         jComboBox1.setRenderer(new MiBoxRenderer());
         jComboBox1.setEditor(new BoxEditor());
-        jComboBox1.setEditable(true);        
-
         jComboBox1.setEditable(true);
-            jComboBox1.setRenderer(new DefaultListCellRenderer() {
-                @Override
-                public Component getListCellRendererComponent(JList<?> list, Object value, int index,
-                                                              boolean isSelected, boolean cellHasFocus) {
-                    JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-                    if (isSelected) {
-                        label.setBackground(Color.YELLOW); // Fondo al seleccionar
-                        label.setForeground(Color.RED);     // Texto al seleccionar
-                    } else {
-                        label.setBackground(Color.CYAN);   // Fondo normal
-                        label.setForeground(Color.BLACK);  // Texto normal
-                    }
-                    label.setOpaque(true); // Hacer visible el fondo
-                    return label;
-                }
-            });
-        // Configurar un renderer personalizado
-        jComboBox1.setRenderer(new DefaultListCellRenderer() {
-            @Override
-            public Component getListCellRendererComponent(JList<?> list, Object value, int index,
-                                                          boolean isSelected, boolean cellHasFocus) {
-                JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-                if (isSelected) {
-                    label.setBackground(new Color(84, 73, 102)); 
-                    label.setForeground(new Color(232,219,255));
-                } else {
-                    label.setBackground(new Color(125, 109, 153));
-                    label.setForeground(new Color(232,219,255));
-                }
-                label.setOpaque(true);
-                return label;
-            }
-        });
+        botonUsuario.setHorizontalAlignment(SwingConstants.CENTER);
     }
     
     private DefaultComboBoxModel databaseCategorias(){
@@ -109,6 +74,7 @@ public class ProductosDatos extends javax.swing.JFrame {
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/atras.png"))); // NOI18N
         jButton2.setBorderPainted(false);
         jButton2.setContentAreaFilled(false);
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton2.setFocusPainted(false);
         jButton2.setFocusable(false);
         jButton2.setPreferredSize(new java.awt.Dimension(50, 50));

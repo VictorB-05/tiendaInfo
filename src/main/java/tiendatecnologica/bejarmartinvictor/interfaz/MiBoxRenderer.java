@@ -16,10 +16,21 @@ class MiBoxRenderer extends JLabel implements ListCellRenderer {
         setForeground(new Color(232,219,255));
     }
 
+    
+    
     @Override
     public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected,
             boolean cellHasFocus) {
+        if (isSelected) {
+            this.setBackground(new Color(84, 73, 102)); 
+            this.setForeground(new Color(232,219,255));
+        } else {
+            this.setBackground(new Color(125, 109, 153));
+            this.setForeground(new Color(232,219,255));
+        }
+        this.setOpaque(true);
         setText(value.toString());
+        
         return this;
     }
     

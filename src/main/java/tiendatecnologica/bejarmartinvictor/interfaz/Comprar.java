@@ -7,6 +7,7 @@ package tiendatecnologica.bejarmartinvictor.interfaz;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Image;
+import java.awt.TrayIcon;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -30,61 +31,28 @@ public class Comprar extends javax.swing.JFrame {
     private DefaultComboBoxModel<Usuario> comboListUsuarios;
     private DefaultComboBoxModel<String> comboListCategorias;
     private DefaultComboBoxModel<Producto> comboListProductos;
-        
+    private int numImg = 0;    
     /**
      * Creates new form DatosUsuario
      */
     public Comprar(JFrame ventanaPrincipal){
         this.inicio =ventanaPrincipal;
         initComponents();
+        modificarComponentes();
+    }
+    
+    private void modificarComponentes() {
         createComboBox(usuarios);
         createComboBox(categoria);
         createComboBox(producto);
         botonUsuario.setHorizontalAlignment(SwingConstants.CENTER);
+        imagen1.setEnabled(false);
     }
     
     private void createComboBox(JComboBox<String> comboBox) {
-        //aquí está el código para un editor y un renderizador simples
         comboBox.setRenderer(new MiBoxRenderer());
         comboBox.setEditor(new BoxEditor());
         comboBox.setEditable(true);        
-
-        //las modificaciones del renderizador y del editor no funcionarán.
-        comboBox.setEditable(true);
-        // Personalizar el renderer
-            comboBox.setRenderer(new DefaultListCellRenderer() {
-                @Override
-                public Component getListCellRendererComponent(JList<?> list, Object value, int index,
-                                                              boolean isSelected, boolean cellHasFocus) {
-                    JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-                    if (isSelected) {
-                        label.setBackground(Color.YELLOW); // Fondo al seleccionar
-                        label.setForeground(Color.RED);     // Texto al seleccionar
-                    } else {
-                        label.setBackground(Color.CYAN);   // Fondo normal
-                        label.setForeground(Color.BLACK);  // Texto normal
-                    }
-                    label.setOpaque(true); // Hacer visible el fondo
-                    return label;
-                }
-            });
-        // Configurar un renderer personalizado
-        comboBox.setRenderer(new DefaultListCellRenderer() {
-            @Override
-            public Component getListCellRendererComponent(JList<?> list, Object value, int index,
-                                                          boolean isSelected, boolean cellHasFocus) {
-                JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-                if (isSelected) {
-                    label.setBackground(new Color(84, 73, 102)); 
-                    label.setForeground(new Color(232,219,255));
-                } else {
-                    label.setBackground(new Color(125, 109, 153));
-                    label.setForeground(new Color(232,219,255));
-                }
-                label.setOpaque(true);
-                return label;
-            }
-        });
     }
     
     private DefaultComboBoxModel databaseUsuario(){
@@ -129,14 +97,19 @@ public class Comprar extends javax.swing.JFrame {
 
         // Cargar la imagen
         int num = producto.getSelectedIndex();
-        Producto producto = comboListProductos.getElementAt(num);
-        productoDetails.setText(producto.datos());
-        String url = producto.getImagenes().get(0);
-        ImageIcon img = new ImageIcon(getClass().getResource("/"+url));
-        ImageIcon icono = redimensionarImagen(img, altoMaximo, anchoMaximo);
+        if(num != 0){
+            Producto producto = comboListProductos.getElementAt(num);
+            productoDetails.setText(producto.datos());
+            String url = producto.getImagenes().get(numImg);
+            ImageIcon img = new ImageIcon(getClass().getResource("/"+url));
+            ImageIcon icono = redimensionarImagen(img, altoMaximo, anchoMaximo);
 
-        imagen.setIcon(icono);
-        imagen.setHorizontalAlignment(JLabel.CENTER);
+            imagen.setIcon(icono);
+            imagen.setHorizontalAlignment(JLabel.CENTER);
+        }else{
+            ImageIcon icono = new ImageIcon(getClass().getResource("/sinCargar.jpg"));
+            imagen.setIcon(icono);
+        }
     }
     
     private static ImageIcon redimensionarImagen(ImageIcon iconoOriginal, int anchoMaximo, int altoMaximo) {
@@ -178,6 +151,8 @@ public class Comprar extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         productoDetails = new javax.swing.JTextArea();
         imagen = new javax.swing.JLabel();
+        imagen1 = new javax.swing.JLabel();
+        imagen2 = new javax.swing.JLabel();
         jSpinner1 = new javax.swing.JSpinner();
         producto = new javax.swing.JComboBox<>();
         categoria = new javax.swing.JComboBox<>();
@@ -273,7 +248,25 @@ public class Comprar extends javax.swing.JFrame {
         productoDetails.setBorder(null);
         productoDetails.setFocusable(false);
 
-        imagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/auriculares2.png"))); // NOI18N
+        imagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sinCargar.jpg"))); // NOI18N
+
+        imagen1.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
+        imagen1.setText("<");
+        imagen1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        imagen1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                imagen1MouseClicked(evt);
+            }
+        });
+
+        imagen2.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
+        imagen2.setText(">");
+        imagen2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        imagen2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                imagen2MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -281,20 +274,35 @@ public class Comprar extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(41, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(imagen, javax.swing.GroupLayout.PREFERRED_SIZE, 536, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(69, 69, 69))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(productoDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 617, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33))))
+                        .addGap(33, 33, 33))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(imagen1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(imagen, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(imagen2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(22, 22, 22))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(9, 9, 9)
-                .addComponent(imagen, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(197, 197, 197)
+                        .addComponent(imagen1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(140, 140, 140))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(imagen2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(144, 144, 144))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(imagen, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))))
                 .addComponent(productoDetails, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(8, Short.MAX_VALUE))
         );
@@ -337,7 +345,7 @@ public class Comprar extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1441, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(227, 227, 227)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -345,9 +353,9 @@ public class Comprar extends javax.swing.JFrame {
                     .addComponent(usuarios, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(producto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(categoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(42, 42, 42)
-                .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(120, 120, 120)
+                .addGap(30, 30, 30)
+                .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(111, 111, 111)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -362,9 +370,9 @@ public class Comprar extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(categoria, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(11, 11, 11)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(producto, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(producto, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(72, 72, 72)
                         .addComponent(botonUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
@@ -377,12 +385,21 @@ public class Comprar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonUsuarioMouseClicked
+        
         Usuario usuario = (Usuario) usuarios.getSelectedItem();
-        int num = producto.getSelectedIndex();
-        Producto producto = comboListProductos.getElementAt(num);
-        Compra compra = new Compra(producto, jSpinner1.getComponentCount(), LocalDate.now());
-        UsarBBDD.compraBBDDInsert(compra, usuario.getId());
-        JOptionPane.showMessageDialog(this, "SE HA HA INSERTADO A LA BASE DE DATOS");
+        if(usuario.getId()!=0){
+            int num = producto.getSelectedIndex();
+            if(num!=0){
+                Producto producto = comboListProductos.getElementAt(num);
+                Compra compra = new Compra(producto, (Integer) jSpinner1.getValue(), LocalDate.now());
+                UsarBBDD.compraBBDDInsert(compra, usuario.getId());
+                JOptionPane.showMessageDialog(this, "SE HA HA INSERTADO A LA BASE DE DATOS");
+            }else{
+                JOptionPane.showMessageDialog(this, "ESCOJE UN PRODUCTO", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+        }else{
+            JOptionPane.showMessageDialog(this, "ESCOJE UN USUARIO", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_botonUsuarioMouseClicked
 
     private void botonUsuarioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonUsuarioMouseEntered
@@ -417,12 +434,44 @@ public class Comprar extends javax.swing.JFrame {
     private void productoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_productoItemStateChanged
         caragarImg();
     }//GEN-LAST:event_productoItemStateChanged
+
+    private void imagen2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imagen2MouseClicked
+        if(imagen2.isEnabled()){
+            int num = producto.getSelectedIndex();
+            Producto producto = comboListProductos.getElementAt(num);
+            if(producto.getId() != 0){
+                numImg = 1;
+                imagen1.setEnabled(true);
+                imagen2.setEnabled(false);
+                caragarImg();
+            }else{
+                JOptionPane.showMessageDialog(this, "ESCOJE UN PRODUCTO", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_imagen2MouseClicked
+
+    private void imagen1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imagen1MouseClicked
+        if(imagen1.isEnabled()){
+            int num = producto.getSelectedIndex();
+            Producto producto = comboListProductos.getElementAt(num);
+            if(producto.getId() != 0){
+                numImg = 0;
+                imagen1.setEnabled(false);
+                imagen2.setEnabled(true);
+                caragarImg();
+            }else{
+                JOptionPane.showMessageDialog(this, "ESCOJE UN PRODUCTO", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_imagen1MouseClicked
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton atras;
     private javax.swing.JLabel botonUsuario;
     private javax.swing.JComboBox<String> categoria;
     private javax.swing.JLabel imagen;
+    private javax.swing.JLabel imagen1;
+    private javax.swing.JLabel imagen2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

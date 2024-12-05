@@ -53,7 +53,7 @@
               "resolucion": "4K",
               "lector DVD": "no"
             },
-            "imagenes": ["ps5.png"],
+            "imagenes": ["ps5_1.png","ps5_2.png"],
             "inventario": 15
           }
         ]
@@ -107,7 +107,7 @@
               "tamaño": "2.5 pulgadas",
               "conector": "USB 3.0"
             },
-            "imagenes": ["disco.png"],
+            "imagenes": ["disco1.png","disco2.png"],
             "inventario": 4
           }
         ]

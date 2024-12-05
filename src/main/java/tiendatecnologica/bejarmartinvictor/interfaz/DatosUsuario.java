@@ -24,52 +24,14 @@ public class DatosUsuario extends javax.swing.JFrame {
     public DatosUsuario(JFrame inicio) {
         this.inicio = inicio;
         initComponents();
-        createComboBox();
-        botonUsuario.setHorizontalAlignment(SwingConstants.CENTER);
+        modificarComponentes();
     }
     
-    private void createComboBox() {
-        //aquí está el código para un editor y un renderizador simples
+    private void modificarComponentes() {
         jComboBox1.setRenderer(new MiBoxRenderer());
         jComboBox1.setEditor(new BoxEditor());
-        jComboBox1.setEditable(true);        
-
-        //las modificaciones del renderizador y del editor no funcionarán.
         jComboBox1.setEditable(true);
-        // Personalizar el renderer
-            jComboBox1.setRenderer(new DefaultListCellRenderer() {
-                @Override
-                public Component getListCellRendererComponent(JList<?> list, Object value, int index,
-                                                              boolean isSelected, boolean cellHasFocus) {
-                    JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-                    if (isSelected) {
-                        label.setBackground(Color.YELLOW); // Fondo al seleccionar
-                        label.setForeground(Color.RED);     // Texto al seleccionar
-                    } else {
-                        label.setBackground(Color.CYAN);   // Fondo normal
-                        label.setForeground(Color.BLACK);  // Texto normal
-                    }
-                    label.setOpaque(true); // Hacer visible el fondo
-                    return label;
-                }
-            });
-        // Configurar un renderer personalizado
-        jComboBox1.setRenderer(new DefaultListCellRenderer() {
-            @Override
-            public Component getListCellRendererComponent(JList<?> list, Object value, int index,
-                                                          boolean isSelected, boolean cellHasFocus) {
-                JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-                if (isSelected) {
-                    label.setBackground(new Color(84, 73, 102)); 
-                    label.setForeground(new Color(232,219,255));
-                } else {
-                    label.setBackground(new Color(125, 109, 153));
-                    label.setForeground(new Color(232,219,255));
-                }
-                label.setOpaque(true);
-                return label;
-            }
-        });
+        botonUsuario.setHorizontalAlignment(SwingConstants.CENTER);
     }
     
     private DefaultComboBoxModel databaseUsuario(){
@@ -113,6 +75,7 @@ public class DatosUsuario extends javax.swing.JFrame {
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/atras.png"))); // NOI18N
         jButton3.setBorderPainted(false);
         jButton3.setContentAreaFilled(false);
+        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton3.setFocusPainted(false);
         jButton3.setFocusable(false);
         jButton3.setPreferredSize(new java.awt.Dimension(50, 50));
@@ -170,11 +133,6 @@ public class DatosUsuario extends javax.swing.JFrame {
         jComboBox1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jComboBox1.setDebugGraphicsOptions(javax.swing.DebugGraphics.LOG_OPTION);
         jComboBox1.setFocusable(false);
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
-            }
-        });
 
         jTextArea1.setBackground(new java.awt.Color(250, 248, 255));
         jTextArea1.setColumns(20);
@@ -242,10 +200,6 @@ public class DatosUsuario extends javax.swing.JFrame {
     private void botonUsuarioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonUsuarioMouseExited
         botonUsuario.setBackground(new Color(125, 109, 153));
     }//GEN-LAST:event_botonUsuarioMouseExited
-
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-
-    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         inicio.setVisible(true);
